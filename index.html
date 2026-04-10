@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="معرض جامعة القصيم - إنجازات وكؤوس الجامعة">
+    <title>معرض جامعة القصيم</title>
+    <!-- Tailwind CSS via CDN (لتصميم احترافي سريع ومتجاوب) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&amp;display=swap');
+        
+        :root {
+            --primary: #003087;
+            --accent: #c5a05b;
+        }
+        
+        * {
+            font-family: 'Cairo', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #f8f9fa, #e5e7eb);
+        }
+        
+        .header-bg {
+            background: linear-gradient(90deg, #003087 0%, #00205f 100%);
+            box-shadow: 0 4px 20px rgba(0, 48, 135, 0.3);
+        }
+        
+        .logo {
+            filter: drop-shadow(0 10px 15px rgba(197, 160, 91, 0.4));
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .trophy-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1),
+                        0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .trophy-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+        
+        .trophy-img {
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            background: #f8f9fa;
+            padding: 15px;
+            transition: transform 0.5s ease;
+        }
+        
+        .trophy-card:hover .trophy-img {
+            transform: scale(1.08);
+        }
+        
+        .modal {
+            animation: modalPop 0.3s ease forwards;
+        }
+        
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .hero-text {
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- HEADER -->
+    <header class="header-bg text-white ">
+        <div class="max-w-screen-2xl mx-auto">
+            
+            <!-- شعار + عنوان -->
+            <div class="flex flex-col items-center justify-center pt-8 pb-6 px-6">
+                <!-- شعار الجامعة -->
+                <div class="flex justify-center mb-6">
+                    <img src="شعار الجامعة.png" 
+                         alt="شعار جامعة القصيم" 
+                         class="logo w-52 h-52 md:w-64 md:h-64 object-contain">
+                </div>
+                
+                <!-- العنوان الرئيسي -->
+                <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-center hero-text">
+                    معرض جامعة القصيم
+                </h1>
+                
+                <!-- الوصف -->
+                <div class="max-w-4xl mx-auto mt-8 text-center">
+                    <p class="text-xl md:text-2xl leading-relaxed text-white/90">
+                        تحتضن جامعة القصيم معرضًا فريدًا يُجسّد مسيرة حافلة بالإنجازات والبطولات، إذ يعكس كل كأس وميدالية عزيمةً راسخة وروحًا رياضية وتعليمية متوهجة دفعت الجامعة دومًا إلى الصدارة والريادة على المستوى الوطني والخليجي.
+                    </p>
+                </div>
+            </div>
+
+            <!-- شريط سفلي للهيدر -->
+            <div class="bg-white/10 backdrop-blur-md py-3 text-sm font-medium flex items-center justify-center gap-8 border-t border-white/20">
+                <a href="#gallery" 
+                   onclick="document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' })"
+                   class="hover:text-amber-300 transition-colors flex items-center gap-2">
+                    <span class="text-2xl">🏆</span>
+                    استكشف الكؤوس والإنجازات
+                </a>
+                <div class="w-px h-5 bg-white/30"></div>
+                <span class="flex items-center gap-2">
+                    <span class="text-2xl">📍</span>
+                    جامعة القصيم - المملكة العربية السعودية
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN GALLERY -->
+    <main class="max-w-screen-2xl mx-auto px-6 py-12" id="gallery">
+        <div class="flex items-center justify-between mb-10">
+            <div>
+                <h2 class="text-4xl font-bold text-gray-900 flex items-center gap-3">
+                    <span class="text-5xl">🏆</span>
+                    معرض الكؤوس والميداليات
+                </h2>
+                <p class="text-gray-600 mt-2 text-lg"> أكثر من  140 إنجازًا رياضيًا وتعليميًا يعكس فخر جامعة القصيم </p>
+            </div>
+            
+            <!-- عداد الصور -->
+            <div class="hidden md:flex items-center gap-2 bg-white shadow-sm rounded-2xl px-6 py-3 text-lg font-semibold text-gray-700">
+               
+                <span class="text-gray-400">بكم نفخر  QU </span>
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+            </div>
+        </div>
+
+        <!-- شبكة الصور (يتم ملؤها بالـ JavaScript) -->
+        <div id="gallery-grid" class="gallery-grid">
+            <!-- سيتم إنشاء البطاقات ديناميكيًا -->
+        </div>
+
+        <!-- زر تحميل المزيد (للتحسين المستقبلي) -->
+        <div class="flex justify-center mt-12">
+            <button onclick="showAllImages()" 
+                    class="px-10 py-4 bg-[#003087] hover:bg-[#00205f] text-white text-lg font-semibold rounded-2xl flex items-center gap-3 transition-all active:scale-95">
+                <span>عرض جميع الإنجازات</span>
+                <span class="text-3xl">↑</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" onclick="if(event.target === this) hideLightbox()" 
+         class="hidden fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-6">
+        <div class="modal max-w-5xl w-full bg-white rounded-3xl overflow-hidden relative">
+            <button onclick="hideLightbox()" 
+                    class="absolute top-6 right-6 bg-white text-gray-900 hover:bg-gray-100 shadow-xl w-12 h-12 rounded-2xl flex items-center justify-center text-4xl leading-none z-10">
+                ✕
+            </button>
+            <img id="lightbox-image" 
+                 src="" 
+                 alt="كأس تكبير" 
+                 class="w-full max-h-[80vh] object-contain bg-gray-100">
+            
+            <div class="p-6 text-center text-gray-600 text-sm">
+                اضغط خارج الصورة أو على الـ ✕ للإغلاق • صور عالية الوضوح من معرض جامعة القصيم
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#003087] text-white mt-16">
+        <div class="max-w-screen-2xl mx-auto px-6 py-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                
+                <!-- عمل الطلاب -->
+                <div>
+                    <h3 class="text-amber-300 uppercase tracking-widest text-sm mb-4">عمل الطلاب</h3>
+                    <div class="space-y-2 text-lg">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">👤</span>
+                            <span>البرق حسان الفتيحي</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">👤</span>
+                            <span>عيسى عبدالملك كرش</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">👤</span>
+                            <span>عبدالرحمن الشريف</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">👤</span>
+                            <span>المقداد محمد</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- شعار صغير + جامعة -->
+                <div class="flex flex-col items-center text-center md:text-left">
+                    <img src="photos/p_0.png" alt="شعار جامعة القصيم" class="w-24 h-24 mb-4 opacity-90">
+                    <h4 class="text-2xl font-bold">جامعة القصيم</h4>
+                    <p class="text-white/70 text-sm mt-1">معرض الإنجازات الرياضية والتعليمية</p>
+                </div>
+
+                <!-- حقوق النشر -->
+                <div class="text-center md:text-right">
+                    <p class="text-3xl font-bold mb-2">2026</p>
+                    <p class="text-white/80">حقوق النشر © جامعة القصيم</p>
+                    <p class="text-xs text-white/60 mt-6">جميع الحقوق محفوظة | تم التصميم بفخر من قبل طلاب الجامعة</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * تهيئة Tailwind CSS
+         */
+        function initTailwind() {
+            return {
+                config(userConfig = {}) {
+                    return {
+                        configUser: userConfig,
+                        theme: {
+                            extend: {
+                                colors: {
+                                    primary: '#003087',
+                                    accent: '#c5a05b'
+                                }
+                            }
+                        }
+                    }
+                },
+                theme: {
+                    extend: {},
+                }
+            }
+        }
+        
+        /**
+         * توليد قائمة مسارات الصور تلقائيًا
+         * حسب ما حددته:
+         * - 1 إلى 70 → photos/p_1.jpg ... p_70.jpg
+         * - 71 إلى 143 → photos/p_71.jpeg ... p_143.jpeg
+         */
+        function generateImagePaths() {
+            const paths = []
+            
+            // الصور من 1 إلى 70 (jpg)
+            for (let i = 1; i <= 70; i++) {
+                paths.push(`photos/p_${i}.jpg`)
+            }
+            
+            // الصور من 71 إلى 143 (jpeg)
+            for (let i = 71; i <= 143; i++) {
+                paths.push(`photos/p_${i}.jpeg`)
+            }
+            
+            return paths
+        }
+        
+        /**
+         * إنشاء بطاقات الصور في الشبكة
+         */
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid')
+            const paths = generateImagePaths()
+            
+            paths.forEach((src, index) => {
+                const cardHTML = `
+                    <div class="trophy-card cursor-pointer group" onclick="showLightbox('${src}', ${index + 1})">
+                        <div class="relative">
+                            <img src="${src}" 
+                                 alt="كأس رقم ${index + 1}" 
+                                 class="trophy-img"
+                                 loading="lazy">
+                            <!-- رقم الصورة -->
+                            <div class="absolute top-4 left-4 bg-white/90 text-[#003087] text-xs font-bold px-3 py-1 rounded-2xl shadow-inner flex items-center justify-center min-w-[28px] h-7">
+                                ${index + 1}
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <p class="text-gray-500 text-sm font-medium group-hover:text-[#003087] transition-colors">
+                                إنجاز جامعة القصيم
+                            </p>
+                        </div>
+                    </div>
+                `
+                grid.innerHTML += cardHTML
+            })
+            
+            // تحديث العداد
+            document.getElementById('count').textContent = paths.length
+        }
+        
+        /**
+         * عرض الصورة في Lightbox (تكبير خرافي)
+         */
+        function showLightbox(src, number) {
+            const lightbox = document.getElementById('lightbox')
+            const img = document.getElementById('lightbox-image')
+            
+            img.src = src
+            lightbox.classList.remove('hidden')
+            lightbox.classList.add('flex')
+            
+            // منع التمرير في الخلفية
+            document.body.style.overflow = 'hidden'
+        }
+        
+        function hideLightbox() {
+            const lightbox = document.getElementById('lightbox')
+            lightbox.classList.add('hidden')
+            lightbox.classList.remove('flex')
+            document.body.style.overflow = 'visible'
+        }
+        
+        /**
+         * زر "عرض جميع الإنجازات" (للتوافق مع المستقبل)
+         */
+        function showAllImages() {
+            const grid = document.getElementById('gallery-grid')
+            grid.scrollIntoView({ behavior: 'smooth' })
+            
+            // تأثير بسيط
+            grid.style.opacity = '0.6'
+            setTimeout(() => {
+                grid.style.transition = 'opacity 0.6s'
+                grid.style.opacity = '1'
+            }, 300)
+        }
+        
+        /**
+         * تشغيل كل شيء عند تحميل الصفحة
+         */
+        window.onload = function() {
+            // تهيئة Tailwind
+            const config = initTailwind().config()
+            document.documentElement.setAttribute('data-tailwind-config', JSON.stringify(config))
+            
+            // رسم الغاليري
+            renderGallery()
+            
+            console.log('%c✅ تم إنشاء موقع معرض جامعة القصيم بنجاح (ملف واحد احترافي)', 'color:#003087; font-size:15px; font-weight:bold')
+            console.log('📸 عدد الصور المعروضة: 143 صورة عالية الوضوح')
+        }
+    </script>
+</body>
+</html>
