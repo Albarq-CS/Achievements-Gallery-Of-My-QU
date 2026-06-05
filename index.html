@@ -1,393 +1,722 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="معرض جامعة القصيم - إنجازات وكؤوس الجامعة">
-    <title>معرض جامعة القصيم</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #003087;
-            --accent: #c5a05b;
-        }
-        
-        * {
-            font-family: 'Cairo', system-ui, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(to bottom, #f8f9fa, #e5e7eb);
-        }
-        
-        .header-bg {
-            background: linear-gradient(90deg, #003087 0%, #00205f 100%);
-            box-shadow: 0 4px 20px rgba(0, 48, 135, 0.3);
-        }
-        
-        .logo {
-            filter: drop-shadow(0 10px 15px rgba(197, 160, 91, 0.4));
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        
-        .trophy-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1),
-                        0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        
-        .trophy-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-        }
-        
-        .trophy-img {
-            width: 100%;
-            height: 260px;
-            object-fit: contain;
-            background: #f8f9fa;
-            padding: 15px;
-            transition: transform 0.5s ease;
-        }
-        
-        .trophy-card:hover .trophy-img {
-            transform: scale(1.08);
-        }
-        
-        .modal {
-            animation: modalPop 0.3s ease forwards;
-        }
-        
-        @keyframes modalPop {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        
-        .hero-text {
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="معرض جامعة القصيم - إنجازات وكؤوس الجامعة">
+<title>معرض جامعة القصيم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:#002266;
+  --navy-deep:#001144;
+  --navy-mid:#003399;
+  --gold:#C8A84B;
+  --gold-light:#E8C96A;
+  --gold-pale:#FDF6E3;
+  --white:#FFFFFF;
+  --gray-50:#F7F8FC;
+  --gray-100:#EAECF4;
+  --gray-300:#CBD0E0;
+  --gray-500:#7A82A0;
+  --gray-700:#3D4460;
+  --text-main:#0D1333;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--gray-50);
+  color:var(--text-main);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ───────────── HERO ───────────── */
+.hero{
+  background:linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, #004488 100%);
+  position:relative;
+  overflow:hidden;
+  padding-bottom:0;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 20%, rgba(200,168,75,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(200,168,75,0.08) 0%, transparent 50%);
+  pointer-events:none;
+}
+
+.hero-pattern{
+  position:absolute;
+  inset:0;
+  opacity:0.04;
+  background-image:
+    repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:1400px;
+  margin:0 auto;
+  padding:3.5rem 2rem 2.5rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:1.5rem;
+}
+
+.logo-ring{
+  width:130px;height:130px;
+  border-radius:50%;
+  border:2px solid rgba(200,168,75,0.35);
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.06);
+  box-shadow:0 0 0 8px rgba(200,168,75,0.07), 0 20px 60px rgba(0,0,0,0.35);
+  flex-shrink:0;
+  animation:pulse-ring 4s ease-in-out infinite;
+}
+
+@keyframes pulse-ring{
+  0%,100%{box-shadow:0 0 0 8px rgba(200,168,75,0.07), 0 20px 60px rgba(0,0,0,0.35)}
+  50%{box-shadow:0 0 0 14px rgba(200,168,75,0.12), 0 20px 60px rgba(0,0,0,0.35)}
+}
+
+.logo-ring img{
+  width:90px;height:90px;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(200,168,75,0.15);
+  border:1px solid rgba(200,168,75,0.3);
+  color:var(--gold-light);
+  font-size:0.8rem;font-weight:700;
+  padding:5px 14px;border-radius:100px;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+}
+
+.hero-badge::before{
+  content:'';width:7px;height:7px;
+  background:var(--gold);border-radius:50%;
+  animation:blink 2s ease-in-out infinite;
+}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.hero h1{
+  font-size:clamp(2.2rem, 6vw, 4rem);
+  font-weight:900;
+  color:var(--white);
+  line-height:1.15;
+  letter-spacing:-0.01em;
+}
+
+.hero h1 span{
+  display:block;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-desc{
+  max-width:680px;
+  font-size:clamp(0.95rem,2vw,1.15rem);
+  color:rgba(255,255,255,0.72);
+  line-height:1.8;
+  font-weight:400;
+}
+
+.hero-stats{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;
+  margin-top:0.5rem;
+}
+
+.stat-pill{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:100px;
+  padding:8px 18px;
+  font-size:0.9rem;color:rgba(255,255,255,0.85);
+  font-weight:500;
+  backdrop-filter:blur(6px);
+  transition:background 0.25s;
+}
+.stat-pill:hover{background:rgba(255,255,255,0.13)}
+.stat-pill strong{color:var(--gold-light);font-weight:800}
+
+/* wave separator */
+.hero-wave{
+  display:block;
+  width:100%;height:52px;
+  margin-top:2rem;
+}
+
+/* ───────────── NAV FILTERS ───────────── */
+.filter-bar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(247,248,252,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--gray-100);
+  padding:0.75rem 1.5rem;
+}
+
+.filter-inner{
+  max-width:1400px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+
+.filter-tabs{
+  display:flex;gap:6px;
+  background:var(--white);
+  border:1px solid var(--gray-100);
+  border-radius:14px;
+  padding:5px;
+}
+
+.filter-tab{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 18px;
+  border-radius:10px;
+  font-size:0.88rem;font-weight:700;
+  cursor:pointer;
+  border:none;background:transparent;
+  color:var(--gray-500);
+  transition:all 0.22s;
+  font-family:'Tajawal',sans-serif;
+  white-space:nowrap;
+}
+.filter-tab:hover{background:var(--gray-50);color:var(--gray-700)}
+.filter-tab.active{
+  background:var(--navy);
+  color:var(--white);
+  box-shadow:0 4px 14px rgba(0,34,102,0.25);
+}
+.filter-tab .tab-icon{font-size:1.1rem}
+.filter-tab .tab-count{
+  background:rgba(255,255,255,0.15);
+  padding:1px 7px;border-radius:20px;
+  font-size:0.75rem;font-weight:600;
+}
+.filter-tab:not(.active) .tab-count{
+  background:var(--gray-100);color:var(--gray-500);
+}
+
+.counter-badge{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.85rem;color:var(--gray-500);font-weight:500;
+}
+.counter-badge strong{color:var(--navy);font-weight:800}
+
+/* ───────────── MAIN CONTENT ───────────── */
+.main-content{
+  max-width:1400px;
+  margin:0 auto;
+  padding:2.5rem 1.5rem 4rem;
+}
+
+.section-header{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:2rem;
+}
+.section-line{
+  width:4px;height:36px;
+  background:linear-gradient(180deg,var(--gold),var(--navy));
+  border-radius:4px;
+  flex-shrink:0;
+}
+.section-title{
+  font-size:1.6rem;font-weight:800;color:var(--navy);
+  line-height:1.2;
+}
+.section-sub{
+  font-size:0.9rem;color:var(--gray-500);margin-top:2px;font-weight:400;
+}
+
+/* ───────────── GALLERY GRID ───────────── */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:var(--white);
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--gray-100);
+  cursor:pointer;
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  position:relative;
+  animation:card-in 0.4s ease both;
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 20px 50px rgba(0,34,102,0.12);
+  border-color:var(--gray-300);
+}
+
+@keyframes card-in{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.card-img-wrap{
+  position:relative;
+  background:var(--gray-50);
+  height:220px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+.card-img{
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:14px;
+  transition:transform 0.45s ease;
+}
+.card:hover .card-img{transform:scale(1.06)}
+
+.card-num{
+  position:absolute;top:10px;right:10px;
+  background:rgba(0,34,102,0.75);
+  color:var(--white);
+  font-size:0.72rem;font-weight:700;
+  padding:3px 9px;border-radius:8px;
+  backdrop-filter:blur(4px);
+  letter-spacing:0.02em;
+}
+
+.card-cat{
+  position:absolute;top:10px;left:10px;
+  font-size:0.7rem;font-weight:700;
+  padding:3px 10px;border-radius:8px;
+}
+.cat-cups{background:rgba(200,168,75,0.15);color:#8B6914}
+.cat-panels{background:rgba(0,100,200,0.12);color:#00408a}
+
+.card-zoom{
+  position:absolute;inset:0;
+  background:rgba(0,22,66,0.55);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.25s;
+}
+.card:hover .card-zoom{opacity:1}
+.zoom-icon{
+  width:44px;height:44px;background:var(--white);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+}
+
+.card-body{
+  padding:12px 14px 14px;
+  border-top:1px solid var(--gray-100);
+}
+.card-label{
+  font-size:0.85rem;font-weight:600;color:var(--gray-700);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-label small{font-size:0.75rem;font-weight:400;color:var(--gray-500)}
+
+/* empty state */
+.empty-state{
+  grid-column:1/-1;
+  text-align:center;padding:5rem 2rem;
+  color:var(--gray-500);
+}
+.empty-state .empty-icon{font-size:3.5rem;margin-bottom:1rem;opacity:0.5}
+.empty-state p{font-size:1.1rem}
+
+/* scroll to top */
+.scroll-top{
+  position:fixed;bottom:2rem;left:2rem;
+  width:46px;height:46px;
+  background:var(--navy);
+  color:var(--white);
+  border:none;border-radius:14px;
+  font-size:1.2rem;cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,34,102,0.3);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(10px);
+  transition:all 0.3s;
+  z-index:500;
+}
+.scroll-top.visible{opacity:1;transform:translateY(0)}
+.scroll-top:hover{background:var(--navy-mid);transform:translateY(-2px)}
+
+/* ───────────── LIGHTBOX ───────────── */
+.lightbox-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,11,33,0.93);
+  z-index:9999;
+  display:none;
+  align-items:center;justify-content:center;
+  padding:1rem;
+  animation:lb-in 0.22s ease;
+}
+.lightbox-overlay.open{display:flex}
+
+@keyframes lb-in{from{opacity:0}to{opacity:1}}
+
+.lightbox-box{
+  position:relative;
+  max-width:900px;width:100%;
+  background:var(--white);
+  border-radius:20px;
+  overflow:hidden;
+  animation:lb-pop 0.25s cubic-bezier(0.34,1.4,0.64,1) both;
+}
+
+@keyframes lb-pop{
+  from{opacity:0;transform:scale(0.93)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.lb-close{
+  position:absolute;top:14px;right:14px;
+  width:38px;height:38px;
+  background:rgba(255,255,255,0.9);
+  border:1px solid var(--gray-100);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;cursor:pointer;z-index:10;
+  box-shadow:0 2px 12px rgba(0,0,0,0.15);
+  transition:background 0.2s;
+  color:var(--gray-700);
+}
+.lb-close:hover{background:var(--white)}
+
+.lb-img{
+  width:100%;
+  max-height:78vh;
+  object-fit:contain;
+  background:var(--gray-50);
+  display:block;
+}
+
+.lb-footer{
+  padding:10px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--gray-100);
+  font-size:0.82rem;color:var(--gray-500);
+}
+.lb-nav{display:flex;gap:8px}
+.lb-nav-btn{
+  padding:5px 14px;border-radius:8px;
+  background:var(--gray-50);border:1px solid var(--gray-100);
+  font-size:0.82rem;font-weight:700;cursor:pointer;
+  font-family:'Tajawal',sans-serif;color:var(--navy);
+  transition:background 0.2s;
+}
+.lb-nav-btn:hover{background:var(--gray-100)}
+
+/* ───────────── FOOTER ───────────── */
+footer{
+  background:linear-gradient(175deg, var(--navy-deep) 0%, var(--navy) 100%);
+  border-top:3px solid var(--gold);
+  padding:3rem 2rem 2rem;
+  color:var(--white);
+}
+.footer-inner{
+  max-width:1400px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:2rem;align-items:center;
+}
+
+.footer-left{display:flex;flex-direction:column;gap:8px}
+.footer-name{font-size:1.1rem;font-weight:800;color:var(--gold-light)}
+.footer-role{font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:400}
+.footer-links{display:flex;gap:8px;margin-top:4px}
+.footer-link{
+  width:36px;height:36px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;text-decoration:none;
+  transition:all 0.2s;
+}
+.footer-link:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px)}
+
+.footer-center img{
+  width:80px;height:80px;object-fit:contain;
+  opacity:0.9;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  transition:transform 0.3s;
+}
+.footer-center img:hover{transform:scale(1.06)}
+
+.footer-right{
+  text-align:left;display:flex;flex-direction:column;
+  gap:4px;align-items:flex-end;
+}
+.footer-right h4{font-size:1rem;font-weight:700;color:var(--gold-light)}
+.footer-right p{font-size:0.82rem;color:rgba(255,255,255,0.5)}
+.footer-year{font-size:1.8rem;font-weight:900;color:var(--gold)}
+.footer-credit{font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:4px;letter-spacing:0.04em}
+
+@media(max-width:768px){
+  .footer-inner{grid-template-columns:1fr;text-align:center}
+  .footer-left{align-items:center}
+  .footer-right{align-items:center;text-align:center}
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+  .card-img-wrap{height:170px}
+  .filter-inner{flex-direction:column;align-items:stretch}
+  .filter-tabs{justify-content:center}
+  .hero-inner{padding:2.5rem 1.5rem 2rem}
+  .logo-ring{width:100px;height:100px}
+  .logo-ring img{width:68px;height:68px}
+}
+
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .card-img-wrap{height:150px}
+  .filter-tab{padding:7px 12px;font-size:0.82rem}
+}
+
+/* ───────────── LOADING SKELETON ───────────── */
+.skeleton{
+  background:linear-gradient(90deg,var(--gray-100) 25%,var(--gray-50) 50%,var(--gray-100) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.4s infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
 </head>
-<body class="bg-gray-100">
+<body>
 
-    <header class="header-bg text-white ">
-        <div class="max-w-screen-2xl mx-auto">
-            
-            <div class="flex flex-col items-center justify-center pt-8 pb-6 px-6">
-                <div class="flex justify-center mb-6">
-                    <img src="شعار الجامعة.png" 
-                         alt="شعار جامعة القصيم" 
-                         class="logo w-52 h-52 md:w-64 md:h-64 object-contain">
-                </div>
-                
-                <h1 class="text-5xl md:text-6xl font-bold tracking-tight text-center hero-text">
-                    معرض جامعة القصيم
-                </h1>
-                
-                <div class="max-w-4xl mx-auto mt-8 text-center">
-                    <p class="text-xl md:text-2xl leading-relaxed text-white/90">
-                        تحتضن جامعة القصيم معرضًا فريدًا يُجسّد مسيرة حافلة بالإنجازات والبطولات، إذ يعكس كل كأس وميدالية لوحة وعزيمةً راسخة وروحًا رياضية وتعليمية متوهجة دفعت الجامعة دومًا إلى الصدارة والريادة على المستوى الوطني والخليجي.
-                    </p>
-                </div>
-            </div>
-
-            <div class="bg-white/10 backdrop-blur-md py-3 text-sm font-medium flex items-center justify-center gap-8 border-t border-white/20">
-                <a href="#gallery" 
-                   onclick="document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' })"
-                   class="hover:text-amber-300 transition-colors flex items-center gap-2">
-                    <span class="text-2xl">🏆</span>
-                    استكشف الكؤوس والإنجازات واللوحات
-                </a>
-                <div class="w-px h-5 bg-white/30"></div>
-                <span class="flex items-center gap-2">
-                    <span class="text-2xl">📍</span>
-                    جامعة القصيم - المملكة العربية السعودية
-                </span>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-screen-2xl mx-auto px-6 py-12" id="gallery">
-        
-        <div class="flex flex-wrap justify-center items-center gap-4 mb-12 bg-white/60 backdrop-blur-md p-3 rounded-2xl shadow-sm border border-gray-200/50 max-w-2xl mx-auto">
-            <button onclick="filterGallery('all')" id="btn-all" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 bg-[#003087] text-white shadow-md shadow-[#003087]/20">
-                📂 الجميع
-            </button>
-            <button onclick="filterGallery('cups')" id="btn-cups" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 text-gray-600 hover:bg-gray-100">
-                🏆 كؤوس المعرض
-            </button>
-            <button onclick="filterGallery('panels')" id="btn-panels" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 text-gray-600 hover:bg-gray-100">
-                🖼️ لوحات المعرض
-            </button>
-        </div>
-
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-4">
-            <div>
-                <h2 id="gallery-title" class="text-4xl font-bold text-gray-900 flex items-center gap-3">
-                    <span class="text-5xl">🏆</span>
-                    معرض الكؤوس والميداليات واللوحات
-                </h2>
-                <p class="text-gray-600 mt-2 text-lg">ألبوم متكامل يعكس فخر واعتزاز جامعة القصيم بمخرجاتها وإنجازاتها</p>
-            </div>
-            
-            <div class="flex items-center gap-2 bg-white shadow-sm rounded-2xl px-6 py-3 text-lg font-semibold text-gray-700">
-                <span class="text-gray-400">بكم نفخر QU </span>
-                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-            </div>
-        </div>
-
-        <div id="gallery-grid" class="gallery-grid">
-            </div>
-
-        <div class="flex justify-center mt-12">
-            <button onclick="showAllImages()" 
-                    class="px-10 py-4 bg-[#003087] hover:bg-[#00205f] text-white text-lg font-semibold rounded-2xl flex items-center gap-3 transition-all active:scale-95">
-                <span>العودة لأعلى المعرض</span>
-                <span class="text-3xl">↑</span>
-            </button>
-        </div>
-    </main>
-
-    <div id="lightbox" onclick="if(event.target === this) hideLightbox()" 
-         class="hidden fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-6">
-        <div class="modal max-w-5xl w-full bg-white rounded-3xl overflow-hidden relative">
-            <button onclick="hideLightbox()" 
-                    class="absolute top-6 right-6 bg-white text-gray-900 hover:bg-gray-100 shadow-xl w-12 h-12 rounded-2xl flex items-center justify-center text-4xl leading-none z-10">
-                ✕
-            </button>
-            <img id="lightbox-image" 
-                 src="" 
-                 alt="عرض مكبر للغاليري" 
-                 class="w-full max-h-[80vh] object-contain bg-gray-100">
-            
-            <div class="p-6 text-center text-gray-600 text-sm font-medium">
-                اضغط خارج الصورة أو على الـ ✕ للإغلاق • صور عالية الوضوح من معرض جامعة القصيم
-            </div>
-        </div>
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero" id="top">
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="logo-ring">
+      <img src="شعار الجامعة.png" alt="شعار جامعة القصيم">
     </div>
+    <div class="hero-badge">جامعة القصيم · المملكة العربية السعودية</div>
+    <h1>
+      معرض الإنجازات
+      <span>والبطولات</span>
+    </h1>
+    <p class="hero-desc">
+      تحتضن جامعة القصيم معرضًا فريدًا يُجسّد مسيرة حافلة بالإنجازات والبطولات، إذ يعكس كل كأس وميدالية عزيمةً راسخة وروحًا رياضية وتعليمية دفعت الجامعة إلى الصدارة والريادة.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-pill">🏆 <strong>143</strong> كأس وميدالية</div>
+      <div class="stat-pill">🖼️ <strong>74</strong> لوحة معرض</div>
+      <div class="stat-pill">📍 بريدة · القصيم</div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 52" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,32 C360,56 1080,8 1440,32 L1440,52 L0,52 Z" fill="#F7F8FC"/>
+  </svg>
+</header>
 
+<!-- ═══════════ FILTER BAR ═══════════ -->
+<nav class="filter-bar" id="gallery">
+  <div class="filter-inner">
+    <div class="filter-tabs">
+      <button class="filter-tab active" id="btn-all" onclick="filterGallery('all')">
+        <span class="tab-icon">📂</span> الجميع <span class="tab-count" id="count-all">217</span>
+      </button>
+      <button class="filter-tab" id="btn-cups" onclick="filterGallery('cups')">
+        <span class="tab-icon">🏆</span> الكؤوس <span class="tab-count" id="count-cups">143</span>
+      </button>
+      <button class="filter-tab" id="btn-panels" onclick="filterGallery('panels')">
+        <span class="tab-icon">🖼️</span> اللوحات <span class="tab-count" id="count-panels">74</span>
+      </button>
+    </div>
+    <div class="counter-badge">
+      يُعرض <strong id="showing-count">217</strong> عنصر
+    </div>
+  </div>
+</nav>
 
-<!-- FOOTER -->
-    <footer class="bg-[#003087] text-white mt-16 border-t-4 border-[#c5a05b] py-12">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-right">
-                
-                <!-- الجهة اليمنى: اسمك وروابط التواصل المهنية -->
-                <div class="flex flex-col space-y-3 items-center md:items-start min-w-[250px]">
-                    <div class="flex items-center gap-2 font-bold text-amber-200 text-xl tracking-wide">
-                        <span>👤</span> <span>Albarq Alfitaihi</span>
-                    </div>
-                    <p class="text-white/60 text-xs">AI Product & Software Engineer</p>
-                    
-                    <div class="flex items-center gap-3 pt-1">
-                        <!-- أيقونة لينكد إن بتصميم مدمج وسلس -->
-                        <a href="https://www.linkedin.com/in/albarq-alftaihi/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BX%2BQeL%2FukSXWqlPDoChK1vA%3D%3D" 
-                           target="_blank" title="LinkedIn Profile"
-                           class="bg-white/10 hover:bg-white/20 transition-all w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 active:scale-95 text-lg group">
-                            <span class="group-hover:scale-110 transition-transform">💼</span>
-                        </a>
-                        <!-- أيقونة الإيميل بتصميم مدمج وسلس -->
-                        <a href="mailto:aq.tech10@gmail.com" title="Email Address"
-                           class="bg-white/10 hover:bg-white/20 transition-all w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 active:scale-95 text-lg group">
-                            <span class="group-hover:scale-110 transition-transform">✉️</span>
-                        </a>
-                    </div>
-                </div>
+<!-- ═══════════ MAIN ═══════════ -->
+<main class="main-content">
+  <div class="section-header">
+    <div class="section-line"></div>
+    <div>
+      <div class="section-title" id="gallery-title">معرض الكؤوس واللوحات</div>
+      <div class="section-sub">ألبوم متكامل يعكس فخر جامعة القصيم بإنجازاتها</div>
+    </div>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</main>
 
-                <!-- الجهة الوسطى: شعار الجامعة في المنتصف تماماً -->
-                <div class="flex flex-col items-center justify-center">
-                    <img src="photos/p_0.png" alt="شعار جامعة القصيم" class="w-24 h-24 opacity-95 filter drop-shadow-lg transition-transform hover:scale-105 duration-300">
-                </div>
+<!-- ═══════════ SCROLL TOP ═══════════ -->
+<button class="scroll-top" id="scroll-top-btn" onclick="scrollToTop()" title="العودة لأعلى">↑</button>
 
-                <!-- الجهة اليسرى: تفاصيل المعرض والسنة -->
-                <div class="flex flex-col items-center md:items-end text-center md:text-left min-w-[250px] space-y-1">
-                    <h4 class="text-lg font-bold text-amber-200">معرض إنجازات جامعة القصيم</h4>
-                    <p class="text-white/70 text-sm">منصة استعراض الكؤوس واللوحات الافتراضية</p>
-                    <p class="text-2xl font-bold text-amber-300 pt-1">2026</p>
-                    <p class="text-white/40 text-[11px] mt-1 tracking-wide">Designed & Engineered by Albarq Alfitaihi</p>
-                </div>
+<!-- ═══════════ LIGHTBOX ═══════════ -->
+<div class="lightbox-overlay" id="lightbox" onclick="handleOverlayClick(event)">
+  <div class="lightbox-box" id="lb-box">
+    <button class="lb-close" onclick="hideLightbox()">✕</button>
+    <img class="lb-img" id="lb-img" src="" alt="عرض مكبر">
+    <div class="lb-footer">
+      <span id="lb-info">جامعة القصيم</span>
+      <div class="lb-nav">
+        <button class="lb-nav-btn" onclick="navigateLightbox(-1)">→ السابق</button>
+        <button class="lb-nav-btn" onclick="navigateLightbox(1)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            </div>
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-name">Albarq Alfitaihi</div>
+      <div class="footer-role">AI Product &amp; Software Engineer</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/albarq-alftaihi/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BX%2BQeL%2FukSXWqlPDoChK1vA%3D%3D"
+           target="_blank" class="footer-link" title="LinkedIn">💼</a>
+        <a href="mailto:aq.tech10@gmail.com" class="footer-link" title="Email">✉️</a>
+      </div>
+    </div>
+    <div class="footer-center">
+      <img src="photos/p_0.png" alt="شعار جامعة القصيم">
+    </div>
+    <div class="footer-right">
+      <h4>معرض إنجازات جامعة القصيم</h4>
+      <p>منصة استعراض الكؤوس واللوحات</p>
+      <div class="footer-year">2026</div>
+      <div class="footer-credit">Designed &amp; Engineered by Albarq Alfitaihi</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+let allItems = [];
+let filteredItems = [];
+let currentLbIndex = 0;
+let currentFilter = 'all';
+
+function buildDB(){
+  const items = [];
+  for(let i=1;i<=70;i++) items.push({id:i,src:`photos/p_${i}.jpg`,category:'cups',label:'كأس وإنجاز'});
+  for(let i=71;i<=143;i++) items.push({id:i,src:`photos/p_${i}.jpeg`,category:'cups',label:'كأس وإنجاز'});
+  for(let i=144;i<=217;i++) items.push({id:i,src:`photos/rn/p-${i}.jpg`,category:'panels',label:'لوحة المعرض'});
+  return items;
+}
+
+function renderGallery(cat){
+  currentFilter = cat;
+  filteredItems = cat === 'all' ? [...allItems] : allItems.filter(x=>x.category===cat);
+
+  const grid = document.getElementById('gallery-grid');
+  grid.innerHTML = '';
+
+  if(!filteredItems.length){
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>لا توجد عناصر في هذا القسم</p></div>`;
+    return;
+  }
+
+  document.getElementById('showing-count').textContent = filteredItems.length;
+
+  filteredItems.forEach((item, idx) => {
+    const cat_cls = item.category === 'cups' ? 'cat-cups' : 'cat-panels';
+    const cat_lbl = item.category === 'cups' ? '🏆 كأس' : '🖼️ لوحة';
+    const delay = Math.min(idx * 0.025, 0.6);
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.style.animationDelay = delay + 's';
+    div.onclick = () => showLightbox(idx);
+    div.innerHTML = `
+      <div class="card-img-wrap">
+        <img class="card-img" src="${item.src}" alt="${item.label} ${item.id}" loading="lazy">
+        <div class="card-num">#${item.id}</div>
+        <div class="card-cat ${cat_cls}">${cat_lbl}</div>
+        <div class="card-zoom"><div class="zoom-icon">🔍</div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-label">
+          ${item.label}
+          <small>جامعة القصيم</small>
         </div>
-    </footer>
-    <script>
-        /**
-         * تهيئة Tailwind CSS
-         */
-        function initTailwind() {
-            return {
-                config(userConfig = {}) {
-                    return {
-                        configUser: userConfig,
-                        theme: {
-                            extend: {
-                                colors: {
-                                    primary: '#003087',
-                                    accent: '#c5a05b'
-                                }
-                            }
-                        }
-                    }
-                },
-                theme: {
-                    extend: {},
-                }
-            }
-        }
+      </div>`;
+    grid.appendChild(div);
+  });
+}
 
-        // مصفوفة حفظ جميع بيانات الصور (القديمة والحديثة)
-        let allGalleryItems = [];
-        
-        /**
-         * توليد مصفوفة المسارات والتصنيفات
-         * - الكؤوس القديمة: 1 إلى 143 (cups)
-         * - اللوحات الجديدة: 144 إلى 217 (panels) وبمسار photos/p_xx.jpg
-         */
-        function buildGalleryDatabase() {
-            const items = [];
-            
-            // 1. الكؤوس القديمة (من 1 إلى 143)
-            for (let i = 1; i <= 70; i++) {
-                items.push({ id: i, src: `photos/p_${i}.jpg`, category: 'cups', label: 'كأس وإنجاز' });
-            }
-            for (let i = 71; i <= 143; i++) {
-                items.push({ id: i, src: `photos/p_${i}.jpeg`, category: 'cups', label: 'كأس وإنجاز' });
-            }
-            
-            // 2. اللوحات الحديثة المضافة (من 144 إلى 217) بالمسار photos/
-            for (let i = 144; i <= 217; i++) {
-                items.push({ id: i, src: `photos/rn/p-${i}.jpg`, category: 'panels', label: 'لوحة المعرض' });
-            }
-            
-            return items;
-        }
-        
-        /**
-         * عرض وتصفية عناصر المعرض حسب القسم المختار
-         */
-        function renderGallery(categoryFilter = 'all') {
-            const grid = document.getElementById('gallery-grid');
-            grid.innerHTML = ''; // تفريغ الشبكة الحالية
-            
-            // تصفية العناصر بناءً على التبويب النشط
-            const filteredItems = allGalleryItems.filter(item => {
-                if (categoryFilter === 'all') return true;
-                return item.category === categoryFilter;
-            });
-            
-            // بناء العناصر في الواجهة بنفس التصميم والاستايل الأصلي
-            filteredItems.forEach((item) => {
-                const cardHTML = `
-                    <div class="trophy-card cursor-pointer group" onclick="showLightbox('${item.src}')">
-                        <div class="relative">
-                            <img src="${item.src}" 
-                                 alt="${item.label} رقم ${item.id}" 
-                                 class="trophy-img"
-                                 loading="lazy">
-                            <div class="absolute top-4 left-4 bg-white/90 text-[#003087] text-xs font-bold px-3 py-1 rounded-2xl shadow-inner flex items-center justify-center min-w-[28px] h-7">
-                                ${item.id}
-                            </div>
-                        </div>
-                        <div class="p-4 text-center">
-                            <p class="text-gray-500 text-sm font-medium group-hover:text-[#003087] transition-colors">
-                                ${item.label} - جامعة القصيم
-                            </p>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += cardHTML;
-            });
-            
-            // تحديث العداد ديناميكيًا في الصفحة
-            document.getElementById('image-counter').textContent = filteredItems.length;
-        }
+function filterGallery(cat){
+  const titles = {
+    all:'معرض الكؤوس واللوحات',
+    cups:'كؤوس وميداليات المعرض',
+    panels:'لوحات المعرض الحديثة'
+  };
+  document.getElementById('gallery-title').textContent = titles[cat];
+  ['all','cups','panels'].forEach(k=>{
+    const btn = document.getElementById('btn-'+k);
+    btn.classList.toggle('active', k===cat);
+  });
+  renderGallery(cat);
+}
 
-        /**
-         * دالة التبديل والفلترة بين أزرار الأقسام (الجميع - الكؤوس - اللوحات)
-         */
-        function filterGallery(category) {
-            // تحديث عناوين القسم بشكل تفاعلي
-            const titleEl = document.getElementById('gallery-title');
-            if(category === 'all') titleEl.innerHTML = '<span class="text-5xl">🏆</span> معرض الكؤوس والميداليات واللوحات';
-            if(category === 'cups') titleEl.innerHTML = '<span class="text-5xl">🏆</span> كؤوس وميداليات المعرض';
-            if(category === 'panels') titleEl.innerHTML = '<span class="text-5xl">🖼️</span> لوحات المعرض الحديثة';
+function showLightbox(idx){
+  currentLbIndex = idx;
+  const item = filteredItems[idx];
+  document.getElementById('lb-img').src = item.src;
+  document.getElementById('lb-info').textContent = `${item.label} #${item.id} — جامعة القصيم`;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-            // تحديث الألوان واستايل الزر النشط وغير النشط
-            const buttons = {
-                all: document.getElementById('btn-all'),
-                cups: document.getElementById('btn-cups'),
-                panels: document.getElementById('btn-panels')
-            };
+function hideLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-            Object.keys(buttons).forEach(key => {
-                if(key === category) {
-                    buttons[key].className = "px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 bg-[#003087] text-white shadow-md shadow-[#003087]/20";
-                } else {
-                    buttons[key].className = "px-6 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 text-gray-600 hover:bg-gray-100";
-                }
-            });
+function handleOverlayClick(e){
+  if(e.target === document.getElementById('lightbox')) hideLightbox();
+}
 
-            // إعادة رسم الصور بناء على الفلتر
-            renderGallery(category);
-        }
-        
-        /**
-         * عرض الصورة في الـ Lightbox المكبر الأصلي
-         */
-        function showLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-image');
-            
-            img.src = src;
-            lightbox.classList.remove('hidden');
-            lightbox.classList.add('flex');
-            
-            // منع التمرير في الخلفية
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function hideLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.add('hidden');
-            lightbox.classList.remove('flex');
-            document.body.style.overflow = 'visible';
-        }
-        
-        /**
-         * العودة السلسة لأعلى المعرض
-         */
-        function showAllImages() {
-            const grid = document.getElementById('gallery');
-            grid.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        /**
-         * تشغيل الأحداث عند تحميل الصفحة بالكامل
-         */
-        window.onload = function() {
-            // تهيئة Tailwind
-            const config = initTailwind().config();
-            document.documentElement.setAttribute('data-tailwind-config', JSON.stringify(config));
-            
-            // إنشاء قاعدة بيانات الصور المدمجة
-            allGalleryItems = buildGalleryDatabase();
-            
-            // تشغيل المعرض تلقائياً على خيار "الجميع" ليظهر القديم والجديد معاً
-            filterGallery('all');
-            
-            console.log('%c✅ تم تحديث معرض جامعة القصيم بنجاح', 'color:#003087; font-size:15px; font-weight:bold');
-            console.log('📸 إجمالي الصور الحالي بعد الإضافة: ' + allGalleryItems.length + ' صورة (143 كأس قديم + 74 لوحة حديثة).');
-        }
-    </script>
+function navigateLightbox(dir){
+  currentLbIndex = (currentLbIndex + dir + filteredItems.length) % filteredItems.length;
+  showLightbox(currentLbIndex);
+}
+
+function scrollToTop(){
+  document.getElementById('top').scrollIntoView({behavior:'smooth'});
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scroll-top-btn');
+  btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+document.addEventListener('keydown', e => {
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key === 'Escape') hideLightbox();
+    if(e.key === 'ArrowLeft') navigateLightbox(1);
+    if(e.key === 'ArrowRight') navigateLightbox(-1);
+  }
+});
+
+window.onload = function(){
+  allItems = buildDB();
+  document.getElementById('count-all').textContent = allItems.length;
+  document.getElementById('count-cups').textContent = allItems.filter(x=>x.category==='cups').length;
+  document.getElementById('count-panels').textContent = allItems.filter(x=>x.category==='panels').length;
+  filterGallery('all');
+};
+</script>
 </body>
 </html>
