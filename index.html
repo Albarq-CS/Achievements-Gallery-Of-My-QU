@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -69,34 +70,45 @@ body{
   z-index:2;
   max-width:1400px;
   margin:0 auto;
-  padding:3.5rem 2rem 2.5rem;
+  padding:4rem 2rem 2.5rem;
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
-  gap:1.5rem;
+  gap:1.8rem;
 }
 
+/* تكبير الشعار والإطار بشكل أوسع */
 .logo-ring{
-  width:130px;height:130px;
+  width:220px;   /* زيادة الحجم بشكل كبير */
+  height:220px;  /* زيادة الحجم بشكل كبير */
   border-radius:50%;
-  border:2px solid rgba(200,168,75,0.35);
+  border:3px solid rgba(200,168,75,0.45);
   display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,0.06);
-  box-shadow:0 0 0 8px rgba(200,168,75,0.07), 0 20px 60px rgba(0,0,0,0.35);
+  background:rgba(255,255,255,0.08);
+  box-shadow:0 0 0 10px rgba(200,168,75,0.08), 0 25px 70px rgba(0,0,0,0.4);
   flex-shrink:0;
   animation:pulse-ring 4s ease-in-out infinite;
+  transition:all 0.3s ease;
+}
+
+.logo-ring:hover {
+  transform: scale(1.03);
+  border-color: var(--gold-light);
+  box-shadow:0 0 0 14px rgba(200,168,75,0.12), 0 30px 80px rgba(0,0,0,0.5);
 }
 
 @keyframes pulse-ring{
-  0%,100%{box-shadow:0 0 0 8px rgba(200,168,75,0.07), 0 20px 60px rgba(0,0,0,0.35)}
-  50%{box-shadow:0 0 0 14px rgba(200,168,75,0.12), 0 20px 60px rgba(0,0,0,0.35)}
+  0%,100%{box-shadow:0 0 0 10px rgba(200,168,75,0.08), 0 25px 70px rgba(0,0,0,0.4)}
+  50%{box-shadow:0 0 0 16px rgba(200,168,75,0.15), 0 25px 70px rgba(0,0,0,0.4)}
 }
 
+/* تكبير حجم صورة الشعار الداخلية لتملأ المساحة بشكل أوسع */
 .logo-ring img{
-  width:90px;height:90px;
+  width:180px;   /* زيادة الحجم بشكل ملحوظ */
+  height:180px;  /* زيادة الحجم بشكل ملحوظ */
   object-fit:contain;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,0.35));
 }
 
 .hero-badge{
@@ -147,6 +159,12 @@ body{
   margin-top:0.5rem;
 }
 
+/* تنسيق الروابط (أزرار الموقع) لتبدو كالأزرار العادية */
+a.stat-pill {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .stat-pill{
   display:flex;align-items:center;gap:8px;
   background:rgba(255,255,255,0.08);
@@ -156,9 +174,12 @@ body{
   font-size:0.9rem;color:rgba(255,255,255,0.85);
   font-weight:500;
   backdrop-filter:blur(6px);
-  transition:background 0.25s;
+  transition:all 0.25s;
 }
-.stat-pill:hover{background:rgba(255,255,255,0.13)}
+.stat-pill:hover{
+  background:rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
 .stat-pill strong{color:var(--gold-light);font-weight:800}
 
 /* wave separator */
@@ -470,6 +491,30 @@ footer{
 }
 .footer-right h4{font-size:1rem;font-weight:700;color:var(--gold-light)}
 .footer-right p{font-size:0.82rem;color:rgba(255,255,255,0.5)}
+
+/* زر الموقع في الفوتر */
+.footer-univ-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  transition: all 0.3s ease;
+}
+.footer-univ-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--gold-light);
+  transform: translateY(-2px);
+}
+
 .footer-year{font-size:1.8rem;font-weight:900;color:var(--gold)}
 .footer-credit{font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:4px;letter-spacing:0.04em}
 
@@ -482,8 +527,10 @@ footer{
   .filter-inner{flex-direction:column;align-items:stretch}
   .filter-tabs{justify-content:center}
   .hero-inner{padding:2.5rem 1.5rem 2rem}
-  .logo-ring{width:100px;height:100px}
-  .logo-ring img{width:68px;height:68px}
+  
+  /* الحفاظ على تناسب الحجم المحدث للشعار على الشاشات الصغيرة */
+  .logo-ring{width:160px;height:160px}
+  .logo-ring img{width:125px;height:125px}
 }
 
 @media(max-width:480px){
@@ -503,7 +550,6 @@ footer{
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
 <header class="hero" id="top">
   <div class="hero-pattern"></div>
   <div class="hero-inner">
@@ -521,7 +567,9 @@ footer{
     <div class="hero-stats">
       <div class="stat-pill">🏆 <strong>143</strong> كأس وميدالية</div>
       <div class="stat-pill">🖼️ <strong>74</strong> لوحة معرض</div>
-      <div class="stat-pill">📍 بريدة · القصيم</div>
+      <a href="https://maps.app.goo.gl/TdpSxVpbXimUi74g6?g_st=iw" target="_blank" class="stat-pill" title="عرض في خرائط جوجل">
+        📍 <strong>موقع المعرض - A 7</strong>
+      </a>
     </div>
   </div>
   <svg class="hero-wave" viewBox="0 0 1440 52" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -529,7 +577,6 @@ footer{
   </svg>
 </header>
 
-<!-- ═══════════ FILTER BAR ═══════════ -->
 <nav class="filter-bar" id="gallery">
   <div class="filter-inner">
     <div class="filter-tabs">
@@ -549,7 +596,6 @@ footer{
   </div>
 </nav>
 
-<!-- ═══════════ MAIN ═══════════ -->
 <main class="main-content">
   <div class="section-header">
     <div class="section-line"></div>
@@ -561,10 +607,8 @@ footer{
   <div class="gallery-grid" id="gallery-grid"></div>
 </main>
 
-<!-- ═══════════ SCROLL TOP ═══════════ -->
 <button class="scroll-top" id="scroll-top-btn" onclick="scrollToTop()" title="العودة لأعلى">↑</button>
 
-<!-- ═══════════ LIGHTBOX ═══════════ -->
 <div class="lightbox-overlay" id="lightbox" onclick="handleOverlayClick(event)">
   <div class="lightbox-box" id="lb-box">
     <button class="lb-close" onclick="hideLightbox()">✕</button>
@@ -579,7 +623,6 @@ footer{
   </div>
 </div>
 
-<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-left">
@@ -597,6 +640,9 @@ footer{
     <div class="footer-right">
       <h4>معرض إنجازات جامعة القصيم</h4>
       <p>منصة استعراض الكؤوس واللوحات</p>
+      <a href="https://qu.edu.sa/" target="_blank" class="footer-univ-btn">
+        🌐 Visit website جامعة القصيم | Qassim University
+      </a>
       <div class="footer-year">2026</div>
       <div class="footer-credit">Designed &amp; Engineered by Albarq Alfitaihi</div>
     </div>
@@ -615,6 +661,17 @@ function buildDB(){
   for(let i=71;i<=143;i++) items.push({id:i,src:`photos/p_${i}.jpeg`,category:'cups',label:'كأس وإنجاز'});
   for(let i=144;i<=217;i++) items.push({id:i,src:`photos/rn/p-${i}.jpg`,category:'panels',label:'لوحة المعرض'});
   return items;
+}
+
+function getDisplayNum(item) {
+  if (item.category === 'panels') {
+    if (item.id >= 144 && item.id <= 197) {
+      return 'A' + (item.id - 143);
+    } else if (item.id >= 198) {
+      return 'B' + (item.id - 197);
+    }
+  }
+  return '#' + item.id;
 }
 
 function renderGallery(cat){
@@ -639,10 +696,13 @@ function renderGallery(cat){
     div.className = 'card';
     div.style.animationDelay = delay + 's';
     div.onclick = () => showLightbox(idx);
+    
+    const displayNum = getDisplayNum(item);
+
     div.innerHTML = `
       <div class="card-img-wrap">
         <img class="card-img" src="${item.src}" alt="${item.label} ${item.id}" loading="lazy">
-        <div class="card-num">#${item.id}</div>
+        <div class="card-num">${displayNum}</div>
         <div class="card-cat ${cat_cls}">${cat_lbl}</div>
         <div class="card-zoom"><div class="zoom-icon">🔍</div></div>
       </div>
@@ -674,7 +734,7 @@ function showLightbox(idx){
   currentLbIndex = idx;
   const item = filteredItems[idx];
   document.getElementById('lb-img').src = item.src;
-  document.getElementById('lb-info').textContent = `${item.label} #${item.id} — جامعة القصيم`;
+  document.getElementById('lb-info').textContent = `${item.label} ${getDisplayNum(item)} — جامعة القصيم`;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -720,3 +780,4 @@ window.onload = function(){
 </script>
 </body>
 </html>
+
