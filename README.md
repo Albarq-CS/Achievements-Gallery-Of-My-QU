@@ -1,9 +1,25 @@
-# Achievements-Gallery-Of-My-QU
-A digital exhibition showcasing the achievements of Qassim University across academic, research, and sports fields. It highlights the university’s awards, trophies, and milestones that reflect excellence, ambition, and leadership.
-Here is the English translation (concise and professional style preserved):
+# Qassim University Achievements Gallery
+## Project Overview
+An Arabic static exhibition presenting Qassim University achievements through a collection of photographs and a browser-based gallery.
 
----
+## Problem Statement
+Make a large visual collection of academic, research, and sports achievements easier to explore in one presentation.
 
-This website is a digital exhibition that highlights the achievements of Qassim University and its distinguished journey across academic, sports, and research fields. It showcases a collection of trophies, awards, and accomplishments that reflect the spirit of excellence and ambition within the university, aiming to emphasize the efforts made toward achieving leadership at the national level.
+## Technologies and Structure
+HTML, embedded CSS/JavaScript, `index.html`, and a large `photos/` asset directory. There is no application backend or database service.
 
-The exhibition offers visitors a smooth and enjoyable exploration experience of achievements, with a modern design that reflects the university’s identity and embodies its values of progress and innovation.
+## Installation and Usage
+Open `index.html`, or serve the repository root:
+```sh
+python -m http.server 8000
+```
+Visit `http://localhost:8000/`. Preserve the relative `photos/` paths. No credentials or package installation are required.
+
+## Scope
+This is a developer's exhibition project; the repository does not establish official university ownership or endorsement. Existing media and attribution are preserved.
+
+## Future Improvements
+Optimize the large image collection, add appropriate alternative text and lazy loading, document media permissions/credits, and verify mobile performance. Keep this visual project secondary to database-backed applications in the developer profile.
+
+## Author
+[Albarq-CS](https://github.com/Albarq-CS)
